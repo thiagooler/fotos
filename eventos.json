@@ -1,17 +1,122 @@
 [
   {
-    "titulo": "Evento Exemplo Futuro",
-    "data": "25/12/2025",
+    "titulo": "Casamento Exemplo Futuro",
+    "data": "15/12/2025",
     "link": "#"
   },
   {
-    "titulo": "Casamento Ana e João",
-    "data": "10/12/2025",
-    "link": "https://link-da-galeria.com"
+    "titulo": "Formatura Exemplo 2026",
+    "data": "20/01/2026",
+    "link": "#"
   },
   {
-    "titulo": "Formatura Turma X",
-    "data": "01/12/2025",
-    "link": "https://link-da-galeria.com"
+    "titulo": "Crisma Igreja Luterana",
+    "data": "07/12/2025",
+    "link": "https://codepen.io/Studio-nbv/full/YPqdNeO"
+  },
+  {
+    "titulo": "Casamento Comunitário - Boa Ventura",
+    "data": "06/12/2025",
+    "link": "https://casamentocomunitarioboaventura2025.netlify.app/"
+  },
+  {
+    "titulo": "Casamento de Debora e Jonas",
+    "data": "06/12/2025",
+    "link": "https://www.fotto.com.br/casamento-de-debora-e-jonas/e/233664/"
+  },
+  {
+    "titulo": "Formatura Saudade 2025",
+    "data": "04/12/2025",
+    "link": "https://formaturasaudade2025.netlify.app/"
+  },
+  {
+    "titulo": "Formatura CMEI Semente do Amanhã",
+    "data": "05/12/2025",
+    "link": "https://formaturaibema2025.netlify.app/"
+  },
+  {
+    "titulo": "Crisma Boa Ventura 2025",
+    "data": "06/07/2025",
+    "link": "https://crismaboaventura2025.netlify.app/"
+  },
+  {
+    "titulo": "Batizado de José e Marlon",
+    "data": "22/11/2025",
+    "link": "https://www.fotto.com.br/batizado-de-jose-e-marlon/e/222574/"
+  },
+  {
+    "titulo": "Casamento Atilson e Joh",
+    "data": "15/11/2025",
+    "link": "https://www.fotto.com.br/casamrnto-atilson-e-joh/e/217375/"
+  },
+  {
+    "titulo": "Formatura Ensino Médio - Ibema",
+    "data": "05/12/2024",
+    "link": "https://2616944.playcode.io/"
+  },
+  {
+    "titulo": "Aniversário da Isabella - 4 anos",
+    "data": "08/11/2025",
+    "link": "https://www.fotto.com.br/aniversario-isabella-4-anos/e/212807/"
+  },
+  {
+    "titulo": "Baile de Formatura do Curso de Dança - Nova Tebas",
+    "data": "02/11/2025",
+    "link": "https://photos.app.goo.gl/BoWQ4J9QYRExiXtJA"
+  },
+  {
+    "titulo": "Casamento Luiz e Tati",
+    "data": "25/10/2025",
+    "link": "https://www.fotto.com.br/casamento-luiz-e-tati/e/202684/"
+  },
+  {
+    "titulo": "Jantar de lançamento da Revista Expressão - Ivaiporã",
+    "data": "24/10/2025",
+    "link": "https://www.portalnbv.com/2025/10/jantar-marca-lancamento-da-nova-edicao.html"
+  },
+  {
+    "titulo": "Formatura - curso de dança de salão do grupo Império da Tradição",
+    "data": "04/10/2025",
+    "link": "https://photos.app.goo.gl/m3Hh7pH7oUbN2Qxo9"
+  },
+  {
+    "titulo": "Aniversário da Sophia - 1 ano",
+    "data": "21/09/2025",
+    "link": "https://www.fotto.com.br/aniversario-sophia-1-ano/e/180564/"
+  },
+  {
+    "titulo": "Festventura 2025",
+    "data": "18/09/2025",
+    "link": "https://www.fotto.com.br/festventura-2025/e/178387/"
+  },
+  {
+    "titulo": "Rodeio Crioulo CTG Tropeiro Arlindo Soares",
+    "data": "12/09/2025",
+    "link": "https://www.fotto.com.br/rodeio-crioulo-ctg-tropeiro-arlindo-soares/e/173964/"
+  },
+  {
+    "titulo": "Baile de Formatura da 15ª turma do curso de dança gaúcha iniciante e da 3ª turma do curso avançado",
+    "data": "06/09/2025",
+    "link": "https://photos.app.goo.gl/YeTvtafT4BxRRSiP9"
+  },
+  {
+    "titulo": "Encontro de trilheiros",
+    "data": "06/09/2025",
+    "link": "https://studio-nbv.fotto.com.br/encontro-dos-pirambeiros/e/150634"
+  },
+  {
+    "titulo": "Casamento Luciele e Iones",
+    "data": "16/08/2025",
+    "link": "https://studio-nbv.fotto.com.br/casamento-luciele-e-iones/e/156662"
+  },
+  {
+    "titulo": "Casamento Emanueli e Osmario",
+    "data": "09/08/2025",
+    "link": "https://studio-nbv.fotto.com.br/casamento-emanueli-e-osmario-09082025/e/153560"
+  },
+  {
+    "titulo": "1º Aninho da Izabelly Anthonella",
+    "data": "03/08/2025",
+    "link": "https://studio-nbv.fotto.com.br/1-aninho-da-izabelly-anthonella/e/151087"
   }
 ]

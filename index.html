@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thiago Henrique - Fotógrafo Profissional</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --primary-dark: #1a1a2e; --primary: #16213e; --secondary: #0f3460;
+            --accent: #e94560; --gold: #ffd700; --light: #f8f9fa; --gray: #6c757d;
+            --dark-gray: #343a40; --future-bg: #e3f2fd; --future-border: #90caf9;
+        }
+        body {
+            font-family: 'Montserrat', sans-serif; line-height: 1.6; color: #333;
+            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 50%, var(--secondary) 100%);
+            min-height: 100vh; overflow-x: hidden;
+        }
+        .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
+        
+        /* HEADER */
+        .header {
+            text-align: center; padding: 40px 20px; background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px); border-radius: 20px; margin-bottom: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.1); box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+        .profile-img {
+            width: 150px; height: 150px; border-radius: 50%; border: 5px solid var(--gold);
+            margin: 0 auto 20px; overflow: hidden;
+        }
+        .profile-img img { width: 100%; height: 100%; object-fit: cover; }
+        .header h1 { font-size: 2.8em; margin-bottom: 10px; color: white; }
+        .header p { font-size: 1.3em; color: var(--gold); margin-bottom: 25px; }
+        
+        /* BOTOES */
+        .header-social-links { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; }
+        .btn {
+            padding: 15px 30px; border-radius: 50px; text-decoration: none; color: white; font-weight: 600;
+            transition: 0.3s; display: inline-block; border: none; cursor: pointer;
+        }
+        .btn:hover { transform: translateY(-3px); }
+        .btn-instagram { background: linear-gradient(45deg, #e1306c, #c13584); }
+        .btn-whatsapp { background: linear-gradient(45deg, #25d366, #128c7e); }
+        .btn-reviews { background: linear-gradient(45deg, #f39c12, #e67e22); }
+        
+        /* SECTIONS */
+        .section, .events-section {
+            margin: 40px 0; padding: 30px; background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px; backdrop-filter: blur(10px);
+        }
+        .section-title { color: var(--primary-dark); margin-bottom: 25px; font-size: 2em; border-bottom: 4px solid var(--accent); display: inline-block; }
+        .subsection-title { font-size: 1.5em; color: var(--secondary); margin: 30px 0 20px 0; border-left: 4px solid var(--gold); padding-left: 15px; }
+
+        /* EVENTOS */
+        .search-input { width: 100%; padding: 15px; border-radius: 50px; border: 2px solid #e9ecef; margin-bottom: 20px; }
+        .timeline-filter { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-bottom: 20px; }
+        .timeline-btn { padding: 8px 16px; border-radius: 20px; border: 1px solid #ccc; cursor: pointer; background: white; }
+        .timeline-btn.active { background: var(--accent); color: white; border-color: var(--accent); }
+        
+        .events-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
+        .event-item {
+            background: white; padding: 20px; border-radius: 15px; border: 1px solid #eee;
+            text-decoration: none; color: inherit; transition: 0.3s; display: block;
+        }
+        .event-item:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
+        .event-item.upcoming { background: var(--future-bg); border-color: var(--future-border); }
+        
+        .event-title { font-weight: bold; font-size: 1.2em; margin-bottom: 10px; }
+        .event-date { color: #666; font-size: 0.9em; margin-bottom: 10px; }
+        .event-link { color: var(--accent); font-weight: bold; font-size: 0.9em; }
+
+        /* OUTROS */
+        .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 15px; text-align: center; }
+        .service-item { background: white; padding: 20px; border-radius: 10px; }
+        .service-icon { font-size: 2em; margin-bottom: 10px; }
+        
+        .portfolio-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
+        .portfolio-img img { width: 100%; border-radius: 10px; }
+
+        .contact-section { background: linear-gradient(135deg, var(--primary), var(--secondary)); color: white; text-align: center; padding: 40px; border-radius: 20px; }
+        .whatsapp-float { position: fixed; bottom: 30px; right: 30px; width: 60px; height: 60px; background: #25d366; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 30px; z-index: 1000; box-shadow: 0 10px 20px rgba(0,0,0,0.3); }
+
+        @media (max-width: 768px) {
+            .header h1 { font-size: 2em; }
+            .header-social-links { flex-direction: column; }
+        }
+        .fade-in { animation: fadeIn 0.8s ease-in; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="header fade-in">
+            <div class="profile-img">
+                <img src="https://i.imgur.com/QaulFxE.png" alt="Thiago Henrique">
+            </div>
+            <h1>Thiago Henrique</h1>
+            <p>Fotógrafo Profissional & Jornalista</p>
+            <div class="header-social-links">
+                <a href="https://www.instagram.com/thiagoh.fotografia/" class="btn btn-instagram" target="_blank"><i class="fab fa-instagram"></i> Instagram</a>
+                <a href="https://wa.me/5542998370150" class="btn btn-whatsapp" target="_blank"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+            </div>
+        </div>
+
+        <div class="events-section fade-in">
+            <h2 class="section-title">Galeria de Eventos</h2>
+            
+            <div class="events-search">
+                <input type="text" id="eventSearch" class="search-input" placeholder="Pesquisar evento...">
+                <div class="timeline-filter" id="timelineFilter"></div>
+            </div>
+
+            <div id="pastEventsContainer">
+                <h3 class="subsection-title">Últimos Realizados (Portfólio)</h3>
+                <div class="events-grid" id="eventsGrid">
+                    <p style="text-align:center; width:100%">Carregando eventos...</p>
+                </div>
+            </div>
+
+            <div id="upcomingEventsContainer" style="display: none;">
+                <h3 class="subsection-title" style="border-left-color: #2196f3;">Próximos Eventos (Agenda)</h3>
+                <div class="events-grid" id="upcomingEventsGrid"></div>
+            </div>
+        </div>
+
+        <div class="section fade-in">
+            <h2 class="section-title">Sobre Mim</h2>
+            <p>Sou Thiago Henrique, fotógrafo de Boa Ventura de São Roque. Meu olhar nasceu no interior, mas já atravessou fronteiras. A fotografia para mim é sentir junto. Seja em casamentos, formaturas ou ensaios, minha missão é fazer desse dia um capítulo inesquecível.</p>
+        </div>
+
+        <div class="section fade-in">
+            <h2 class="section-title">Serviços</h2>
+            <div class="services-grid">
+                <div class="service-item"><div class="service-icon">💍</div><strong>Casamentos</strong></div>
+                <div class="service-item"><div class="service-icon">🎂</div><strong>Aniversários</strong></div>
+                <div class="service-item"><div class="service-icon">🗓️</div><strong>Eventos</strong></div>
+                <div class="service-item"><div class="service-icon">🎓</div><strong>Formaturas</strong></div>
+                <div class="service-item"><div class="service-icon">🤰</div><strong>Gestante</strong></div>
+            </div>
+        </div>
+
+        <div class="section fade-in">
+            <h2 class="section-title">Destaques</h2>
+            <div class="portfolio-grid">
+                <a href="https://www.instagram.com/stories/highlights/18117901396416760/" target="_blank" class="event-item">
+                    <div class="portfolio-img"><img src="https://i.imgur.com/Dqr6OHd.png" alt="Casamento"></div>
+                    <p style="text-align:center; margin-top:10px; font-weight:bold">Casamento</p>
+                </a>
+                <a href="https://www.instagram.com/stories/highlights/18116836810405353/" target="_blank" class="event-item">
+                    <div class="portfolio-img"><img src="https://i.imgur.com/XszlJrB.png" alt="Gestante"></div>
+                    <p style="text-align:center; margin-top:10px; font-weight:bold">Gestante</p>
+                </a>
+            </div>
+        </div>
+
+        <div class="section fade-in">
+            <h2 class="section-title">Avaliações</h2>
+            <div class="header-social-links">
+                <a href="https://g.page/studio-nbv/review" class="btn btn-reviews" target="_blank"><i class="fas fa-star"></i> Avaliar no Google</a>
+            </div>
+        </div>
+
+        <div class="contact-section fade-in">
+            <h3>Solicite seu Orçamento Premium</h3>
+            <p>Entre em contato pelo WhatsApp e vamos planejar seu ensaio!</p>
+            <a href="https://wa.me/5542998370150" class="btn btn-whatsapp" target="_blank"><i class="fab fa-whatsapp"></i> Chamar no WhatsApp</a>
+        </div>
+        
+        <div style="text-align: center; color: rgba(255,255,255,0.5); padding: 20px;">
+            <p>Boa Ventura de São Roque, PR | Atendendo todo o Brasil</p>
+        </div>
+    </div>
+
+    <a href="https://wa.me/5542998370150" class="whatsapp-float" target="_blank"><i class="fab fa-whatsapp"></i></a>
+
+    <script>
+        const nomesMeses = ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'];
+        let todosEventos = [];
+
+        // Converte string "DD/MM/AAAA" para objeto Date
+        function dataParaObjeto(dataStr) {
+            if(!dataStr) return new Date();
+            const [dia, mes, ano] = dataStr.split('/');
+            return new Date(ano, mes - 1, dia);
+        }
+
+        // Função Principal: Carrega JSON e Renderiza
+        function carregarERenderizar() {
+            // Adiciona um timestamp para evitar cache do navegador e mostrar atualização na hora
+            fetch('eventos.json?v=' + new Date().getTime())
+                .then(response => response.json())
+                .then(data => {
+                    todosEventos = data;
+                    renderizarPagina();
+                })
+                .catch(erro => {
+                    console.error("Erro ao carregar eventos:", erro);
+                    document.getElementById('eventsGrid').innerHTML = '<p>Erro ao carregar a galeria.</p>';
+                });
+        }
+
+        function renderizarPagina(eventos = todosEventos) {
+            const hoje = new Date();
+            hoje.setHours(0, 0, 0, 0);
+
+            // Filtros de Data
+            const passados = eventos.filter(e => dataParaObjeto(e.data) < hoje)
+                                    .sort((a, b) => dataParaObjeto(b.data) - dataParaObjeto(a.data));
+
+            const futuros = eventos.filter(e => dataParaObjeto(e.data) >= hoje)
+                                   .sort((a, b) => dataParaObjeto(a.data) - dataParaObjeto(b.data));
+
+            renderizarLista(passados, 'eventsGrid', false);
+            renderizarLista(futuros, 'upcomingEventsGrid', true);
+            criarLinhaDoTempo();
+        }
+
+        function renderizarLista(lista, elementoId, ehFuturo) {
+            const container = document.getElementById(elementoId);
+            const wrapper = document.getElementById(ehFuturo ? 'upcomingEventsContainer' : 'pastEventsContainer');
+            container.innerHTML = '';
+
+            const termoBusca = document.getElementById('eventSearch').value.toLowerCase();
+            const itensVisiveis = (ehFuturo || termoBusca.length > 0) ? lista : lista.slice(0, 6);
+
+            if (lista.length === 0) {
+                if(ehFuturo) wrapper.style.display = 'none';
+                else container.innerHTML = '<p style="grid-column:1/-1;text-align:center;color:#666;">Nenhum evento encontrado.</p>';
+                return;
+            }
+            if(ehFuturo) wrapper.style.display = 'block';
+
+            itensVisiveis.forEach(evento => {
+                const item = document.createElement('a');
+                item.className = ehFuturo ? 'event-item upcoming' : 'event-item';
+                item.href = (evento.link && evento.link !== '#') ? evento.link : 'javascript:void(0)';
+                if(!ehFuturo && evento.link !== '#') item.target = '_blank';
+
+                const icone = ehFuturo ? 'fas fa-clock' : 'fas fa-camera';
+                const textoBtn = ehFuturo ? 'Em breve' : 'Ver galeria';
+
+                item.innerHTML = `
+                    <div class="event-title">${evento.titulo}</div>
+                    <div class="event-date"><i class="far fa-calendar"></i> ${evento.data}</div>
+                    <div class="event-link"><i class="${icone}"></i> ${textoBtn}</div>
+                `;
+                container.appendChild(item);
+            });
+        }
+
+        // Timeline Dinâmica
+        function criarLinhaDoTempo() {
+            const timeline = document.getElementById('timelineFilter');
+            timeline.innerHTML = '';
+            
+            const hoje = new Date(); hoje.setHours(0,0,0,0);
+            const passados = todosEventos.filter(e => dataParaObjeto(e.data) < hoje);
+            const anos = [...new Set(passados.map(e => e.data.split('/')[2]))].sort((a,b) => b - a);
+
+            const btnTodos = document.createElement('button');
+            btnTodos.className = 'timeline-btn active';
+            btnTodos.textContent = 'Todos';
+            btnTodos.onclick = () => {
+                document.querySelectorAll('.timeline-btn').forEach(b => b.classList.remove('active'));
+                btnTodos.classList.add('active');
+                renderizarPagina(todosEventos);
+            };
+            timeline.appendChild(btnTodos);
+
+            anos.forEach(ano => {
+                const btn = document.createElement('button');
+                btn.className = 'timeline-btn';
+                btn.textContent = ano;
+                btn.onclick = () => {
+                    document.querySelectorAll('.timeline-btn').forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    const filtrados = todosEventos.filter(e => e.data.split('/')[2] === ano);
+                    renderizarPagina(filtrados);
+                };
+                timeline.appendChild(btn);
+            });
+        }
+
+        // Busca
+        document.getElementById('eventSearch').addEventListener('input', function() {
+            const termo = this.value.toLowerCase();
+            const filtrados = todosEventos.filter(e => 
+                e.titulo.toLowerCase().includes(termo) || e.data.includes(termo)
+            );
+            renderizarPagina(termo ? filtrados : todosEventos);
+        });
+
+        // Inicia
+        document.addEventListener('DOMContentLoaded', () => {
+            carregarERenderizar();
+            document.querySelectorAll('.section, .events-section').forEach((s, i) => 
+                setTimeout(() => s.classList.add('fade-in'), i * 150));
+        });
+    </script>
+</body>
+</html>

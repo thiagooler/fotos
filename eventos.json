@@ -1,0 +1,17 @@
+[
+  {
+    "titulo": "Evento Exemplo Futuro",
+    "data": "25/12/2025",
+    "link": "#"
+  },
+  {
+    "titulo": "Casamento Ana e João",
+    "data": "10/12/2025",
+    "link": "https://link-da-galeria.com"
+  },
+  {
+    "titulo": "Formatura Turma X",
+    "data": "01/12/2025",
+    "link": "https://link-da-galeria.com"
+  }
+]

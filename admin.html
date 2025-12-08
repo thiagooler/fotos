@@ -7,10 +7,11 @@
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <style>
-    /* ESTILO MANTIDO DO SEU ARQUIVO ORIGINAL */
+    /* ESTILO GERAL */
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body { font-family: 'Poppins', sans-serif; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); min-height: 100vh; padding: 20px; color: #333; }
     .container { max-width: 1200px; margin: 0 auto; background: rgba(255, 255, 255, 0.95); border-radius: 20px; box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1); overflow: hidden; backdrop-filter: blur(10px); }
+    
     header { background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%); color: white; padding: 30px; text-align: center; position: relative; }
     h1 { font-size: 2.5rem; margin-bottom: 10px; font-weight: 600; }
     .subtitle { font-size: 1.1rem; opacity: 0.9; font-weight: 300; }
@@ -21,10 +22,17 @@
     .section { margin-bottom: 30px; padding: 25px; background: #f8f9fa; border-radius: 15px; box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05); }
     .section-title { color: #2c3e50; margin-bottom: 20px; font-size: 1.5rem; font-weight: 600; display: flex; align-items: center; gap: 10px; }
     
-    .form-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; margin-bottom: 20px; }
+    .form-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; margin-bottom: 20px; align-items: end; }
     label { display: block; margin-bottom: 8px; font-weight: 500; color: #555; }
+    
+    /* Inputs atualizados para suportar date picker */
     input, select { padding: 15px; border: 2px solid #e1e8ed; border-radius: 10px; font-size: 16px; font-family: 'Poppins', sans-serif; transition: all 0.3s ease; width: 100%; }
     input:focus, select:focus { outline: none; border-color: #3498db; box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1); }
+    
+    /* Input Group para o Link e Botão Mágico */
+    .input-group { display: flex; gap: 10px; }
+    .btn-magic { background: #8e44ad; color: white; border: none; border-radius: 10px; padding: 0 15px; cursor: pointer; transition: 0.3s; font-size: 1.2rem; display: flex; align-items: center; justify-content: center;}
+    .btn-magic:hover { background: #9b59b6; transform: scale(1.05); }
 
     .btn { background: linear-gradient(135deg, #3498db 0%, #2980b9 100%); color: white; border: none; padding: 15px 25px; border-radius: 10px; font-size: 16px; font-weight: 500; cursor: pointer; transition: all 0.3s ease; margin: 5px; box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3); display: inline-flex; align-items: center; gap: 8px; }
     .btn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(52, 152, 219, 0.4); }
@@ -78,20 +86,29 @@
     <div class="content">
         <div class="section">
             <div class="section-title">➕ Adicionar Novo Evento</div>
+            
+            <div style="margin-bottom: 15px;">
+                <label>1. Cole o Link da Galeria</label>
+                <div class="input-group">
+                    <input type="text" id="novoLink" placeholder="Ex: https://embrevenbv.netlify.app/?data=091225&nome=..." value="#">
+                    <button class="btn-magic" onclick="extrairDadosMagicos()" title="Extrair Data e Nome do Link">
+                        <i class="fas fa-magic"></i>
+                    </button>
+                </div>
+                <small style="color: #666; font-size: 0.8rem;">Dica: Cole o link e clique na varinha para preencher data e nome automaticamente.</small>
+            </div>
+
             <div class="form-grid">
                 <div>
-                    <label>Título do Evento</label>
+                    <label>2. Título do Evento</label>
                     <input type="text" id="novoTitulo" placeholder="Ex: Casamento João & Maria">
                 </div>
                 <div>
-                    <label>Data</label>
-                    <input type="text" id="novoData" placeholder="DD/MM/AAAA">
-                </div>
-                <div>
-                    <label>Link da Galeria</label>
-                    <input type="text" id="novoLink" placeholder="Ex: https://..." value="#">
+                    <label>3. Data</label>
+                    <input type="date" id="novoData">
                 </div>
             </div>
+
             <button class="btn btn-success" onclick="adicionarEvento()">
                 ✨ Adicionar à Lista
             </button>
@@ -108,7 +125,7 @@
             </div>
 
             <div id="listaEventos" class="event-list">
-                </div>
+            </div>
 
             <button class="btn btn-save-cloud" onclick="salvarNoGithub()">
                 🚀 SALVAR ALTERAÇÕES NO SITE
@@ -120,7 +137,7 @@
     </div>
 
     <footer>
-        <p>Studio NBV - Painel 3.0 © 2025</p>
+        <p>Studio NBV - Painel 3.1 © 2025</p>
     </footer>
 </div>
 
@@ -152,7 +169,7 @@
         <label style="margin-top:10px;">Título</label>
         <input type="text" id="editTitulo">
         <label style="margin-top:10px;">Data</label>
-        <input type="text" id="editData">
+        <input type="date" id="editData">
         <label style="margin-top:10px;">Link</label>
         <input type="text" id="editLink">
         
@@ -212,9 +229,57 @@
         document.getElementById('loadingOverlay').style.display = show ? 'flex' : 'none';
     }
 
+    // --- NOVA FUNÇÃO: EXTRAIR DADOS DO LINK ---
+    function extrairDadosMagicos() {
+        const linkInput = document.getElementById('novoLink');
+        const tituloInput = document.getElementById('novoTitulo');
+        const dataInput = document.getElementById('novoData');
+        const urlStr = linkInput.value.trim();
+
+        if (!urlStr || urlStr === '#') {
+            mostrarNotificacao('Cole um link válido primeiro!', true);
+            return;
+        }
+
+        try {
+            const url = new URL(urlStr);
+            const params = new URLSearchParams(url.search);
+            
+            // Pega os parametros 'nome' e 'data'
+            const nome = params.get('nome');
+            const dataRaw = params.get('data'); // Formato esperado: 091225 (DDMMYY)
+
+            let alterou = false;
+
+            if (nome) {
+                tituloInput.value = nome;
+                alterou = true;
+            }
+
+            if (dataRaw && dataRaw.length === 6) {
+                // Converte 091225 para 2025-12-09 (formato do input date)
+                const dia = dataRaw.substring(0, 2);
+                const mes = dataRaw.substring(2, 4);
+                const ano = '20' + dataRaw.substring(4, 6); // Assume 20xx
+                
+                dataInput.value = `${ano}-${mes}-${dia}`;
+                alterou = true;
+            }
+
+            if (alterou) {
+                mostrarNotificacao('✨ Dados extraídos com sucesso!');
+            } else {
+                mostrarNotificacao('Não encontrei dados de "nome" ou "data" no link.', true);
+            }
+
+        } catch (e) {
+            console.error(e);
+            mostrarNotificacao('Link inválido ou erro na extração.', true);
+        }
+    }
+
     // --- LÓGICA DO GITHUB ---
 
-    // Função auxiliar para lidar com UTF-8 em Base64 (para acentos funcionarem)
     function utf8_to_b64(str) {
         return window.btoa(unescape(encodeURIComponent(str)));
     }
@@ -232,7 +297,6 @@
         toggleLoading(true, "Baixando lista de eventos do GitHub...");
 
         try {
-            // Adiciona timestamp para evitar cache
             const url = `https://api.github.com/repos/${config.user}/${config.repo}/contents/eventos.json?t=${new Date().getTime()}`;
             
             const response = await fetch(url, {
@@ -240,7 +304,6 @@
             });
 
             if (response.status === 404) {
-                // Arquivo não existe ainda, iniciamos vazio
                 eventos = [];
                 renderizarLista();
                 toggleLoading(false);
@@ -251,7 +314,7 @@
             if (!response.ok) throw new Error('Falha na conexão');
 
             const data = await response.json();
-            shaAtual = data.sha; // Importante para poder salvar depois
+            shaAtual = data.sha;
             
             const content = b64_to_utf8(data.content);
             eventos = JSON.parse(content);
@@ -282,7 +345,7 @@
             const body = {
                 message: "Atualização via Painel Admin NBV",
                 content: utf8_to_b64(JSON.stringify(eventos, null, 2)),
-                sha: shaAtual // Se for undefined (arquivo novo), a API aceita criar
+                sha: shaAtual
             };
 
             const response = await fetch(url, {
@@ -296,7 +359,7 @@
 
             if (response.ok) {
                 const data = await response.json();
-                shaAtual = data.content.sha; // Atualiza o SHA para a próxima salvada
+                shaAtual = data.content.sha;
                 toggleLoading(false);
                 mostrarNotificacao('✅ Sucesso! O site será atualizado em instantes.');
             } else {
@@ -311,20 +374,36 @@
         }
     }
 
-    // --- LÓGICA DE GERENCIAMENTO ---
+    // --- LÓGICA DE GERENCIAMENTO (Formatos de Data Atualizados) ---
+
+    // Auxiliar: Converte "AAAA-MM-DD" (Input) para "DD/MM/AAAA" (JSON/Visual)
+    function inputParaFormatado(dateStr) {
+        if(!dateStr) return "";
+        const parts = dateStr.split('-');
+        return `${parts[2]}/${parts[1]}/${parts[0]}`;
+    }
+
+    // Auxiliar: Converte "DD/MM/AAAA" (JSON) para "AAAA-MM-DD" (Input)
+    function formatadoParaInput(dateStr) {
+        if(!dateStr) return "";
+        const parts = dateStr.split('/');
+        return `${parts[2]}-${parts[1]}-${parts[0]}`;
+    }
 
     function adicionarEvento() {
         const titulo = document.getElementById('novoTitulo').value.trim();
-        const data = document.getElementById('novoData').value.trim();
+        const dataInput = document.getElementById('novoData').value.trim(); // Vem YYYY-MM-DD
         const link = document.getElementById('novoLink').value.trim();
 
-        if(!titulo || !data) {
+        if(!titulo || !dataInput) {
             mostrarNotificacao('Preencha pelo menos Título e Data.', true);
             return;
         }
 
-        // Adiciona no início da lista
-        eventos.unshift({ titulo, data, link });
+        // Converte para o formato brasileiro antes de salvar na lista
+        const dataFormatada = inputParaFormatado(dataInput);
+
+        eventos.unshift({ titulo, data: dataFormatada, link });
         
         // Limpa campos
         document.getElementById('novoTitulo').value = '';
@@ -346,16 +425,26 @@
         const ev = eventos[index];
         document.getElementById('editIndex').value = index;
         document.getElementById('editTitulo').value = ev.titulo;
-        document.getElementById('editData').value = ev.data;
+        
+        // Converte DD/MM/AAAA para YYYY-MM-DD para o input type="date" aceitar
+        document.getElementById('editData').value = formatadoParaInput(ev.data);
+        
         document.getElementById('editLink').value = ev.link;
         document.getElementById('editModal').classList.add('active');
     }
 
     function confirmarEdicao() {
         const index = document.getElementById('editIndex').value;
-        eventos[index].titulo = document.getElementById('editTitulo').value;
-        eventos[index].data = document.getElementById('editData').value;
-        eventos[index].link = document.getElementById('editLink').value;
+        const novoTitulo = document.getElementById('editTitulo').value;
+        const novaDataRaw = document.getElementById('editData').value;
+        const novoLink = document.getElementById('editLink').value;
+        
+        eventos[index].titulo = novoTitulo;
+        
+        // Converte volta para DD/MM/AAAA
+        eventos[index].data = inputParaFormatado(novaDataRaw);
+        
+        eventos[index].link = novoLink;
         
         fecharModal('editModal');
         renderizarLista();
@@ -378,13 +467,11 @@
         document.getElementById('contadorEventos').innerText = `${eventos.length} eventos`;
 
         eventos.forEach((ev, index) => {
-            // Filtro de busca
             if(termo && !ev.titulo.toLowerCase().includes(termo) && !ev.data.includes(termo)) return;
 
             const div = document.createElement('div');
             div.className = 'event-item';
             
-            // Verifica se é futuro ou passado
             const dataEv = dataObjeto(ev.data);
             const isFuturo = dataEv >= hoje;
             const tag = isFuturo 
@@ -408,7 +495,6 @@
         });
     }
 
-    // Iniciar
     document.addEventListener('DOMContentLoaded', carregarDadosDoGithub);
 
 </script>

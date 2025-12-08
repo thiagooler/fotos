@@ -9,6 +9,7 @@
     <title>Thiago Henrique - Fotógrafo Profissional</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+        /* CSS MANTIDO EXATAMENTE COMO NO SEU BASE */
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
         :root {
@@ -30,6 +31,7 @@
             color: #333;
             background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 50%, var(--secondary) 100%);
             min-height: 100vh;
+            position: relative;
             overflow-x: hidden;
         }
 
@@ -44,22 +46,19 @@
 
         .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
 
-        /* Header */
+        /* Header Styles */
         .header {
-            text-align: center;
-            padding: 40px 20px;
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            margin-bottom: 30px;
+            text-align: center; padding: 40px 20px;
+            background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(10px);
+            border-radius: 20px; margin-bottom: 30px;
             border: 1px solid rgba(255, 255, 255, 0.1);
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-            position: relative;
-            overflow: hidden;
+            position: relative; overflow: hidden;
         }
 
         .header::before {
-            content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
+            content: ''; position: absolute; top: -50%; left: -50%;
+            width: 200%; height: 200%;
             background: linear-gradient(45deg, transparent, rgba(233, 69, 96, 0.1), transparent);
             transform: rotate(45deg); animation: shine 3s infinite;
         }
@@ -95,7 +94,7 @@
             margin-top: 20px; position: relative; z-index: 2; flex-wrap: wrap;
         }
 
-        /* Buttons */
+        /* Button Styles */
         .btn {
             display: inline-block; padding: 15px 30px;
             background: linear-gradient(45deg, var(--accent), #ff6b81);
@@ -107,20 +106,31 @@
         }
 
         .btn:hover { transform: translateY(-3px); box-shadow: 0 8px 25px rgba(233, 69, 96, 0.6); }
+
         .btn::before {
             content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%;
             background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
             transition: 0.5s;
         }
+
         .btn:hover::before { left: 100%; }
 
-        .btn-instagram { background: linear-gradient(45deg, #e1306c, #c13584); box-shadow: 0 5px 15px rgba(225, 48, 108, 0.4); }
-        .btn-whatsapp { background: linear-gradient(45deg, #25d366, #128c7e); box-shadow: 0 5px 15px rgba(37, 211, 102, 0.4); }
-        .btn-reviews { background: linear-gradient(45deg, #f39c12, #e67e22); box-shadow: 0 5px 15px rgba(243, 156, 18, 0.4); }
         .btn-primary { background: linear-gradient(45deg, #3498db, #2980b9); box-shadow: 0 5px 15px rgba(52, 152, 219, 0.4); }
-        .btn-secondary { background: linear-gradient(45deg, #e74c3c, #c0392b); box-shadow: 0 5px 15px rgba(231, 76, 60, 0.4); }
+        .btn-primary:hover { box-shadow: 0 8px 25px rgba(52, 152, 219, 0.6); }
 
-        /* Sections */
+        .btn-secondary { background: linear-gradient(45deg, #e74c3c, #c0392b); box-shadow: 0 5px 15px rgba(231, 76, 60, 0.4); }
+        .btn-secondary:hover { box-shadow: 0 8px 25px rgba(231, 76, 60, 0.6); }
+
+        .btn-instagram { background: linear-gradient(45deg, #e1306c, #c13584); box-shadow: 0 5px 15px rgba(225, 48, 108, 0.4); }
+        .btn-instagram:hover { box-shadow: 0 8px 25px rgba(225, 48, 108, 0.6); }
+
+        .btn-whatsapp { background: linear-gradient(45deg, #25d366, #128c7e); box-shadow: 0 5px 15px rgba(37, 211, 102, 0.4); }
+        .btn-whatsapp:hover { box-shadow: 0 8px 25px rgba(37, 211, 102, 0.6); }
+
+        .btn-reviews { background: linear-gradient(45deg, #f39c12, #e67e22); box-shadow: 0 5px 15px rgba(243, 156, 18, 0.4); }
+        .btn-reviews:hover { box-shadow: 0 8px 25px rgba(243, 156, 18, 0.6); }
+
+        /* Section Styles */
         .section, .events-section {
             margin: 40px 0; padding: 30px;
             background: rgba(255, 255, 255, 0.95);
@@ -132,22 +142,58 @@
 
         .section-title {
             color: var(--primary-dark); margin-bottom: 25px;
-            font-size: 2em; font-weight: 600; position: relative; padding-bottom: 15px;
+            font-size: 2em; font-weight: 600;
+            position: relative; padding-bottom: 15px;
         }
+
         .section-title::after {
             content: ''; position: absolute; bottom: 0; left: 0;
             width: 80px; height: 4px;
             background: linear-gradient(90deg, var(--accent), var(--gold));
             border-radius: 2px;
         }
-
+        
         .subsection-title {
             font-size: 1.5em; color: var(--secondary);
             margin: 40px 0 20px 0; padding-left: 15px;
             border-left: 4px solid var(--gold);
         }
 
-        /* Events Grid */
+        /* Events Section */
+        .events-search { margin-bottom: 30px; }
+
+        .search-input {
+            width: 100%; padding: 15px 20px;
+            border: 2px solid #e9ecef; border-radius: 50px;
+            font-size: 16px; margin-bottom: 20px;
+            transition: all 0.3s ease; background: white;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .search-input:focus {
+            outline: none; border-color: var(--accent);
+            box-shadow: 0 5px 15px rgba(233, 69, 96, 0.2);
+        }
+
+        .timeline-filter {
+            display: flex; flex-wrap: wrap; gap: 12px;
+            margin-bottom: 25px; justify-content: center;
+        }
+
+        .timeline-btn {
+            padding: 10px 20px; background: rgba(255, 255, 255, 0.8);
+            border: 2px solid #e9ecef; border-radius: 30px;
+            cursor: pointer; transition: all 0.3s ease;
+            font-weight: 500; color: var(--dark-gray);
+        }
+
+        .timeline-btn:hover, .timeline-btn.active {
+            background: linear-gradient(45deg, var(--accent), #ff6b81);
+            color: white; border-color: var(--accent);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(233, 69, 96, 0.3);
+        }
+
         .events-grid {
             display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 25px;
@@ -164,97 +210,82 @@
             transform: translateY(-5px); box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
             border-color: var(--accent);
         }
-
+        
         .event-item.upcoming { background: var(--future-bg); border-color: var(--future-border); }
         .event-item.upcoming:hover { border-color: #2196f3; box-shadow: 0 15px 30px rgba(33, 150, 243, 0.2); }
 
-        .event-title { font-weight: 700; margin-bottom: 12px; color: var(--primary-dark); font-size: 1.2em; }
-        .event-date { color: var(--gray); font-size: 0.95em; margin-bottom: 15px; display: flex; align-items: center; gap: 8px; }
+        .event-title {
+            font-weight: 700; margin-bottom: 12px;
+            color: var(--primary-dark); font-size: 1.2em;
+        }
+
+        .event-date {
+            color: var(--gray); font-size: 0.95em;
+            margin-bottom: 15px; display: flex;
+            align-items: center; gap: 8px;
+        }
+
         .event-link {
-            color: var(--accent); text-decoration: none; font-size: 0.95em;
-            display: inline-flex; align-items: center; gap: 8px; font-weight: 500;
+            color: var(--accent); text-decoration: none;
+            font-size: 0.95em; display: inline-flex;
+            align-items: center; gap: 8px; font-weight: 500;
             transition: all 0.3s ease;
         }
+        
         .event-item.upcoming .event-link { color: #1976d2; }
         .event-link:hover { text-decoration: underline; gap: 12px; }
 
-        /* Timeline & Search */
-        .search-input {
-            width: 100%; padding: 15px 20px; border: 2px solid #e9ecef;
-            border-radius: 50px; font-size: 16px; margin-bottom: 20px;
-            transition: all 0.3s ease; background: white;
-        }
-        .search-input:focus { outline: none; border-color: var(--accent); }
+        /* About, Services, Portfolio, Reviews, Contact, Location Styles */
+        /* MANTIDOS IGUAIS AO ORIGINAL */
+        .about-text { font-size: 1.1em; line-height: 1.8; color: var(--dark-gray); }
+        .about-text p { margin-bottom: 25px; text-align: justify; }
+        .about-text strong { color: var(--accent); }
 
-        .timeline-filter { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 25px; justify-content: center; }
-        .timeline-btn {
-            padding: 10px 20px; background: rgba(255, 255, 255, 0.8);
-            border: 2px solid #e9ecef; border-radius: 30px; cursor: pointer;
-            transition: all 0.3s ease; font-weight: 500; color: var(--dark-gray);
-        }
-        .timeline-btn:hover, .timeline-btn.active {
-            background: linear-gradient(45deg, var(--accent), #ff6b81);
-            color: white; border-color: var(--accent);
-        }
-
-        /* Other Sections: Services, Portfolio, etc. */
-        .services-grid, .portfolio-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 25px; margin-top: 20px; }
-        
-        .service-item {
-            background: white; padding: 30px 20px; border-radius: 15px;
-            text-align: center; border: 1px solid #e9ecef; transition: all 0.3s ease;
-        }
-        .service-item:hover { transform: translateY(-5px); border-color: var(--accent); }
+        .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 25px; margin-top: 20px; }
+        .service-item { background: white; padding: 30px 20px; border-radius: 15px; text-align: center; border: 1px solid #e9ecef; transition: all 0.3s ease; box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05); }
+        .service-item:hover { transform: translateY(-5px); box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1); border-color: var(--accent); }
         .service-icon { font-size: 2.5em; margin-bottom: 15px; color: var(--accent); }
+        .service-item strong { font-size: 1.1em; color: var(--primary-dark); }
 
+        .portfolio-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 25px; margin-top: 20px; }
         .portfolio-item { text-align: center; transition: all 0.3s ease; }
         .portfolio-item:hover { transform: translateY(-5px); }
-        .portfolio-img {
-            width: 100%; height: 200px; border-radius: 15px; overflow: hidden;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1); position: relative;
-        }
+        .portfolio-item a { display: block; text-decoration: none; }
+        .portfolio-img { width: 100%; height: 200px; border-radius: 15px; overflow: hidden; box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1); position: relative; }
         .portfolio-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s ease; }
         .portfolio-item:hover .portfolio-img img { transform: scale(1.05); }
-        .portfolio-overlay {
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(233, 69, 96, 0.8); display: flex; align-items: center; justify-content: center;
-            opacity: 0; transition: opacity 0.3s ease;
-        }
+        .portfolio-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(233, 69, 96, 0.8); display: flex; align-items: center; justify-content: center; opacity: 0; transition: opacity 0.3s ease; }
         .portfolio-item:hover .portfolio-overlay { opacity: 1; }
         .portfolio-overlay i { color: white; font-size: 2em; }
         .portfolio-item p { margin-top: 15px; font-weight: 600; color: var(--primary-dark); }
 
-        /* Contact & Footer */
-        .contact-section {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            padding: 40px; border-radius: 20px; text-align: center; color: white;
-            margin: 40px 0; box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-        }
-        .location {
-            background: rgba(255, 255, 255, 0.1); padding: 30px; border-radius: 15px;
-            text-align: center; color: white; border: 1px solid rgba(255, 255, 255, 0.2);
-        }
+        .reviews-links { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; margin-top: 20px; }
+        .contact-section { background: linear-gradient(135deg, var(--primary), var(--secondary)); padding: 40px; border-radius: 20px; text-align: center; color: white; margin: 40px 0; box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3); border: 1px solid rgba(255, 255, 255, 0.1); }
+        .contact-section h3 { color: white; margin-bottom: 20px; font-size: 1.8em; }
+        .contact-section p { font-size: 1.2em; margin-bottom: 25px; opacity: 0.9; }
+        .social-links { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; margin-top: 20px; }
+        .location { background: rgba(255, 255, 255, 0.1); padding: 30px; border-radius: 15px; text-align: center; color: white; border: 1px solid rgba(255, 255, 255, 0.2); }
+        .location h2 { margin-bottom: 15px; font-size: 1.5em; }
+        .location p { margin-bottom: 10px; font-size: 1.1em; }
         .location strong { color: var(--gold); }
 
-        .whatsapp-float {
-            position: fixed; width: 70px; height: 70px; bottom: 30px; right: 30px;
-            background: linear-gradient(135deg, #25d366, #128c7e); border-radius: 50%;
-            display: flex; align-items: center; justify-content: center; color: white;
-            font-size: 35px; text-decoration: none; box-shadow: 0 10px 30px rgba(37, 211, 102, 0.5);
-            transition: all 0.3s ease; z-index: 1000; animation: pulse 2s infinite;
-        }
-        .whatsapp-float:hover { transform: scale(1.1) rotate(15deg); }
+        .whatsapp-float { position: fixed; width: 70px; height: 70px; bottom: 30px; right: 30px; background: linear-gradient(135deg, #25d366, #128c7e); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 35px; text-decoration: none; box-shadow: 0 10px 30px rgba(37, 211, 102, 0.5); transition: all 0.3s ease; z-index: 1000; animation: pulse 2s infinite; }
+        .whatsapp-float:hover { transform: scale(1.1) rotate(15deg); box-shadow: 0 15px 40px rgba(37, 211, 102, 0.7); }
         @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.1); } 100% { transform: scale(1); } }
 
-        /* Fade In Animation */
+        /* Animations */
         .fade-in { animation: fadeIn 0.8s ease-in; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
-
+        
         /* Mobile */
         @media (max-width: 768px) {
+            .container { padding: 15px; }
+            .header { padding: 30px 15px; margin-bottom: 20px; }
             .header h1 { font-size: 2.2em; }
-            .events-grid, .services-grid, .portfolio-grid { grid-template-columns: 1fr; }
-            .header-social-links, .social-links { flex-direction: column; }
+            .profile-img { width: 120px; height: 120px; }
+            .events-grid, .services-grid, .portfolio-grid { grid-template-columns: 1fr; gap: 20px; }
+            .header-social-links, .reviews-links, .social-links { flex-direction: column; align-items: center; gap: 15px; }
+            .btn { width: 100%; }
         }
     </style>
 </head>
@@ -262,13 +293,17 @@
     <div class="container">
         <div class="header fade-in">
             <div class="profile-img">
-                <img src="https://i.imgur.com/QaulFxE.png" alt="Thiago Henrique">
+                <img src="https://i.imgur.com/QaulFxE.png" alt="Thiago Henrique, fotógrafo profissional">
             </div>
             <h1>Thiago Henrique</h1>
             <p>Fotógrafo Profissional & Jornalista</p>
             <div class="header-social-links">
-                <a href="https://www.instagram.com/thiagoh.fotografia/" class="btn btn-instagram" target="_blank"><i class="fab fa-instagram"></i> Instagram</a>
-                <a href="https://wa.me/5542998370150" class="btn btn-whatsapp" target="_blank"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+                <a href="https://www.instagram.com/thiagoh.fotografia/" class="btn btn-instagram" target="_blank">
+                    <i class="fab fa-instagram"></i> Instagram
+                </a>
+                <a href="https://wa.me/5542998370150?text=Olá! Gostaria de solicitar um orçamento para fotografia." class="btn btn-whatsapp" target="_blank">
+                    <i class="fab fa-whatsapp"></i> WhatsApp
+                </a>
             </div>
         </div>
 
@@ -276,7 +311,7 @@
             <h2 class="section-title">Galeria de Eventos</h2>
             
             <div class="events-search">
-                <input type="text" id="eventSearch" class="search-input" placeholder="Pesquisar eventos...">
+                <input type="text" id="eventSearch" class="search-input" placeholder="Pesquisar eventos por nome ou data...">
                 <div class="timeline-filter" id="timelineFilter"></div>
             </div>
 
@@ -296,9 +331,10 @@
         <div class="section fade-in" id="sobre-mim">
             <h2 class="section-title">Sobre Mim</h2>
             <div class="about-text">
-                <p>Sou Thiago Henrique, fotógrafo de Boa Ventura de São Roque. Meu olhar nasceu no interior, mas já atravessou fronteiras, registrando momentos do Brasil ao Chile.</p>
-                <p>A fotografia para mim é sentir junto. Seja em casamentos, formaturas ou ensaios, minha missão é fazer desse dia um capítulo inesquecível.</p>
-                <p>Reconhecido como <strong>Melhor do Ano</strong> por três vezes consecutivas e fotógrafo oficial da Revista Expressão, eu crio experiências, usando a fotografia como uma forma de terapia e autoconhecimento.</p>
+                <p>Sou Thiago Henrique, fotógrafo de Boa Ventura de São Roque, apaixonado por eternizar histórias há mais de uma década. Meu olhar nasceu no interior, mas já atravessou fronteiras — do Brasil ao Chile — registrando momentos que não conhecem limites de tempo ou distância.</p>
+                <p>A fotografia, para mim, não é apenas técnica. É sentir junto, é transformar gestos simples em memórias eternas. Cada clique carrega compromisso, verdade e emoção. Seja em casamentos, formaturas, ensaios ou grandes eventos, acredito que <strong>o dia é do cliente</strong> — único, especial e irrepetível. Minha missão é fazer desse dia um capítulo inesquecível da sua vida.</p>
+                <p>Ao longo da minha trajetória, tive a honra de ser reconhecido como <strong>Melhor do Ano em Boa Ventura por três anos consecutivos</strong>, ser o <strong>fotógrafo oficial da Revista Expressão</strong>, assinar ensaios de moda para marcas como <strong>Bem Campeiro</strong> e <strong>San't Steban</strong>, além de atuar em empresas como a <strong>Cross Formaturas</strong>.</p>
+                <p>Mais do que fotografar, eu <strong>crio experiências</strong>. Com sensibilidade, direção humanizada e conhecimento em psicologia aplicada, ajudo cada pessoa a se sentir confiante diante da câmera. Porque acredito que a fotografia também pode ser <strong>terapêutica</strong>: um encontro consigo mesmo, um convite a enxergar sua própria beleza.</p>
             </div>
         </div>
 
@@ -310,43 +346,87 @@
                 <div class="service-item"><div class="service-icon">🗓️</div><strong>Eventos</strong></div>
                 <div class="service-item"><div class="service-icon">🎓</div><strong>Formaturas</strong></div>
                 <div class="service-item"><div class="service-icon">🧑‍💼</div><strong>Perfil Profissional</strong></div>
+                <div class="service-item"><div class="service-icon">👶</div><strong>Infantil</strong></div>
                 <div class="service-item"><div class="service-icon">🤰</div><strong>Gestante</strong></div>
+                <div class="service-item"><div class="service-icon">👩‍❤️‍👨</div><strong>Casal</strong></div>
+                <div class="service-item"><div class="service-icon">👗</div><strong>15 Anos</strong></div>
             </div>
         </div>
 
         <div class="section fade-in" id="portfolio">
-            <h2 class="section-title">Destaques</h2>
+            <h2 class="section-title">Portfólio</h2>
             <div class="portfolio-grid">
                 <div class="portfolio-item">
                     <a href="https://www.instagram.com/stories/highlights/18117901396416760/" target="_blank">
-                        <div class="portfolio-img"><img src="https://i.imgur.com/Dqr6OHd.png" alt="Casamento"><div class="portfolio-overlay"><i class="fas fa-search-plus"></i></div></div>
+                        <div class="portfolio-img"><img src="https://i.imgur.com/Dqr6OHd.png" alt="Exemplo de fotografia de casamento"><div class="portfolio-overlay"><i class="fas fa-search-plus"></i></div></div>
                     </a>
                     <p>Casamento</p>
                 </div>
                 <div class="portfolio-item">
+                    <a href="https://www.instagram.com/stories/highlights/18008109686658651/" target="_blank">
+                        <div class="portfolio-img"><img src="https://i.imgur.com/oOdynl3.png" alt="Exemplo de fotografia de 15 anos"><div class="portfolio-overlay"><i class="fas fa-search-plus"></i></div></div>
+                    </a>
+                    <p>15 Anos</p>
+                </div>
+                <div class="portfolio-item">
                     <a href="https://www.instagram.com/stories/highlights/18116836810405353/" target="_blank">
-                        <div class="portfolio-img"><img src="https://i.imgur.com/XszlJrB.png" alt="Gestante"><div class="portfolio-overlay"><i class="fas fa-search-plus"></i></div></div>
+                        <div class="portfolio-img"><img src="https://i.imgur.com/XszlJrB.png" alt="Exemplo de fotografia de gestante"><div class="portfolio-overlay"><i class="fas fa-search-plus"></i></div></div>
                     </a>
                     <p>Gestante</p>
                 </div>
+                <div class="portfolio-item">
+                    <a href="https://www.instagram.com/stories/highlights/17908434846022466/" target="_blank">
+                        <div class="portfolio-img"><img src="https://i.imgur.com/s6QhNOK.png" alt="Exemplo de fotografia infantil"><div class="portfolio-overlay"><i class="fas fa-search-plus"></i></div></div>
+                    </a>
+                    <p>Infantil</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="section fade-in" id="avaliacoes">
+            <h2 class="section-title">Avaliações dos Clientes</h2>
+            <div class="reviews-links">
+                <a href="https://www.google.com/search?q=studio+nbv&rlz=1C1ONGR_pt-PTBR1165BR1165&oq=studio+nbv&gs_lcrp=EgZjaHJvbWUqDAgAECMYJxiABBiKBTIMCAAQIxgnGIAEGIoFMg0IARAuGK8BGMcBGIAEMgYIAhAjGCcyBggDEEUYPTIGCAQQRRg9MgYIBRBFGEEyBggGEEUYQTIGCAcQRRhB0gEIMjc5MjAwajeoAgCwAgA&sourceid=chrome&ie=UTF-8#mpd=~4729566589293999046/customers/reviews" class="btn btn-reviews" target="_blank">
+                    <i class="fas fa-star"></i> Avaliações no Google
+                </a>
+                <a href="https://www.instagram.com/stories/highlights/17924762246986378/" class="btn btn-instagram" target="_blank">
+                    <i class="fas fa-comments"></i> Depoimentos no Instagram
+                </a>
             </div>
         </div>
 
         <div class="contact-section fade-in">
             <h3>Solicite seu Orçamento Premium</h3>
-            <p>Entre em contato pelo WhatsApp e vamos planejar seu ensaio!</p>
-            <a href="https://wa.me/5542998370150" class="btn btn-whatsapp" target="_blank"><i class="fab fa-whatsapp"></i> WhatsApp - Orçamento</a>
+            <p>Entre em contato pelo WhatsApp e vamos planejar seu ensaio dos sonhos!</p>
+            <a href="https://wa.me/5542998370150?text=Olá! Gostaria de solicitar um orçamento para fotografia." class="btn btn-whatsapp" target="_blank">
+                <i class="fab fa-whatsapp"></i> WhatsApp - Orçamento
+            </a>
+        </div>
+
+        <div class="section fade-in" id="redes-sociais">
+            <h2 class="section-title">Redes Sociais</h2>
+            <div class="social-links">
+                <a href="https://www.instagram.com/thiagoh.fotografia/" class="btn btn-primary" target="_blank">
+                    <i class="fab fa-instagram"></i> Instagram - Portfólio
+                </a>
+                <a href="https://www.facebook.com/thiagooler" class="btn btn-secondary" target="_blank">
+                    <i class="fab fa-facebook"></i> Facebook
+                </a>
+            </div>
         </div>
 
         <div class="section fade-in">
             <div class="location">
                 <h2><i class="fas fa-map-marker-alt"></i> Localização</h2>
-                <p><strong>Base:</strong> Boa Ventura de São Roque, PR | <strong>Atuação:</strong> Todo o Brasil</p>
+                <p><strong>Base:</strong> Boa Ventura de São Roque, PR</p>
+                <p><strong>Atuação:</strong> Todo o Brasil e Exterior</p>
             </div>
         </div>
     </div>
 
-    <a href="https://wa.me/5542998370150" class="whatsapp-float" target="_blank"><i class="fab fa-whatsapp"></i></a>
+    <a href="https://wa.me/5542998370150?text=Olá! Gostaria de solicitar um orçamento para fotografia." class="whatsapp-float" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
 
     <script>
         const nomesMeses = ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'];
@@ -361,7 +441,7 @@
 
         // Função PRINCIPAL: Carrega JSON e Renderiza
         function carregarEventos() {
-            // O parâmetro '?v=' + tempo serve para garantir que o site pegue sempre a versão mais nova do arquivo, ignorando cache
+            // Usa timestamp para evitar cache e atualizar na hora
             fetch('eventos.json?v=' + new Date().getTime())
                 .then(response => {
                     if (!response.ok) {
@@ -376,7 +456,7 @@
                 })
                 .catch(erro => {
                     console.error("Erro:", erro);
-                    document.getElementById('eventsGrid').innerHTML = '<p style="text-align: center; width: 100%; color: red;">Erro ao carregar a lista de eventos. Verifique se o arquivo eventos.json existe.</p>';
+                    document.getElementById('eventsGrid').innerHTML = '<p style="grid-column:1/-1; text-align: center; width: 100%; color: red;">Erro ao carregar a lista de eventos. Verifique se o arquivo eventos.json existe.</p>';
                 });
         }
 
@@ -499,9 +579,17 @@
 
         // Inicialização
         document.addEventListener('DOMContentLoaded', () => {
-            carregarEventos(); // Chama o carregador JSON em vez de renderizar direto
+            carregarEventos(); 
             document.querySelectorAll('.section, .events-section').forEach((s, i) => 
                 setTimeout(() => s.classList.add('fade-in'), i * 150));
+        });
+
+        // Efeito Botão
+        document.querySelectorAll('.btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                this.style.transform = 'scale(0.95)';
+                setTimeout(() => { this.style.transform = ''; }, 100);
+            });
         });
     </script>
 </body>

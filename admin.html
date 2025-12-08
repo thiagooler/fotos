@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Painel Administrativo - Studio NBV</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+    /* ESTILO MANTIDO DO SEU ARQUIVO ORIGINAL */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Poppins', sans-serif; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); min-height: 100vh; padding: 20px; color: #333; }
+    .container { max-width: 1200px; margin: 0 auto; background: rgba(255, 255, 255, 0.95); border-radius: 20px; box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1); overflow: hidden; backdrop-filter: blur(10px); }
+    header { background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%); color: white; padding: 30px; text-align: center; position: relative; }
+    h1 { font-size: 2.5rem; margin-bottom: 10px; font-weight: 600; }
+    .subtitle { font-size: 1.1rem; opacity: 0.9; font-weight: 300; }
+    .config-btn { position: absolute; top: 20px; right: 20px; background: rgba(255,255,255,0.1); border: none; color: white; padding: 10px; border-radius: 50%; cursor: pointer; transition: 0.3s; }
+    .config-btn:hover { background: rgba(255,255,255,0.3); transform: rotate(90deg); }
+    
+    .content { padding: 30px; }
+    .section { margin-bottom: 30px; padding: 25px; background: #f8f9fa; border-radius: 15px; box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05); }
+    .section-title { color: #2c3e50; margin-bottom: 20px; font-size: 1.5rem; font-weight: 600; display: flex; align-items: center; gap: 10px; }
+    
+    .form-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; margin-bottom: 20px; }
+    label { display: block; margin-bottom: 8px; font-weight: 500; color: #555; }
+    input, select { padding: 15px; border: 2px solid #e1e8ed; border-radius: 10px; font-size: 16px; font-family: 'Poppins', sans-serif; transition: all 0.3s ease; width: 100%; }
+    input:focus, select:focus { outline: none; border-color: #3498db; box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1); }
+
+    .btn { background: linear-gradient(135deg, #3498db 0%, #2980b9 100%); color: white; border: none; padding: 15px 25px; border-radius: 10px; font-size: 16px; font-weight: 500; cursor: pointer; transition: all 0.3s ease; margin: 5px; box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3); display: inline-flex; align-items: center; gap: 8px; }
+    .btn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(52, 152, 219, 0.4); }
+    .btn-success { background: linear-gradient(135deg, #27ae60 0%, #229954 100%); box-shadow: 0 4px 15px rgba(39, 174, 96, 0.3); }
+    .btn-danger { background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%); box-shadow: 0 4px 15px rgba(231, 76, 60, 0.3); padding: 8px 12px; font-size: 14px; }
+    .btn-edit { background: linear-gradient(135deg, #9b59b6 0%, #8e44ad 100%); box-shadow: 0 4px 15px rgba(155, 89, 182, 0.3); padding: 8px 12px; font-size: 14px; }
+    .btn-save-cloud { background: linear-gradient(135deg, #e67e22 0%, #d35400 100%); width: 100%; justify-content: center; font-size: 1.2rem; margin-top: 20px; }
+
+    .event-list { max-height: 500px; overflow-y: auto; border: 1px solid #e1e8ed; border-radius: 10px; padding: 15px; background: white; }
+    .event-item { padding: 15px; border: 1px solid #e1e8ed; border-radius: 8px; margin-bottom: 10px; background: #f8f9fa; transition: all 0.3s ease; display: flex; justify-content: space-between; align-items: center; }
+    .event-item:hover { box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1); transform: translateY(-2px); }
+    .event-info { flex-grow: 1; }
+    .event-title { font-weight: 600; color: #2c3e50; font-size: 1.1rem; }
+    .event-meta { color: #7f8c8d; font-size: 0.9rem; margin-top: 5px; }
+    .event-actions { display: flex; gap: 5px; margin-left: 15px; }
+
+    .notification { position: fixed; top: 20px; right: 20px; padding: 15px 25px; background: #27ae60; color: white; border-radius: 10px; box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2); transform: translateX(400px); transition: transform 0.3s ease; z-index: 2000; }
+    .notification.show { transform: translateX(0); }
+    .notification.error { background: #e74c3c; }
+
+    /* Modal */
+    .modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.6); align-items: center; justify-content: center; }
+    .modal.active { display: flex; }
+    .modal-content { background-color: white; padding: 30px; border-radius: 15px; width: 90%; max-width: 500px; box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3); animation: slideIn 0.3s; }
+    @keyframes slideIn { from {transform: translateY(-50px); opacity: 0;} to {transform: translateY(0); opacity: 1;} }
+    
+    .loading-overlay { position: fixed; top:0; left:0; width:100%; height:100%; background: rgba(255,255,255,0.8); z-index: 3000; display: none; justify-content: center; align-items: center; flex-direction: column; }
+    .spinner { width: 50px; height: 50px; border: 5px solid #f3f3f3; border-top: 5px solid #3498db; border-radius: 50%; animation: spin 1s linear infinite; margin-bottom: 15px; }
+    @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+    /* Tags para diferenciar Passado/Futuro */
+    .tag { padding: 3px 8px; border-radius: 4px; font-size: 0.75rem; font-weight: 600; margin-left: 10px; }
+    .tag-future { background: #e3f2fd; color: #1976d2; border: 1px solid #90caf9; }
+    .tag-past { background: #e8f5e9; color: #2e7d32; border: 1px solid #a5d6a7; }
+</style>
+</head>
+<body>
+
+<div class="loading-overlay" id="loadingOverlay">
+    <div class="spinner"></div>
+    <h3 id="loadingText">Carregando dados do GitHub...</h3>
+</div>
+
+<div class="container">
+    <header>
+        <h1>Painel Studio NBV</h1>
+        <p class="subtitle">Gerenciador de Eventos (GitHub Connect)</p>
+        <button class="config-btn" onclick="abrirConfig()" title="Configurar GitHub"><i class="fas fa-cog fa-2x"></i></button>
+    </header>
+
+    <div class="content">
+        <div class="section">
+            <div class="section-title">➕ Adicionar Novo Evento</div>
+            <div class="form-grid">
+                <div>
+                    <label>Título do Evento</label>
+                    <input type="text" id="novoTitulo" placeholder="Ex: Casamento João & Maria">
+                </div>
+                <div>
+                    <label>Data</label>
+                    <input type="text" id="novoData" placeholder="DD/MM/AAAA">
+                </div>
+                <div>
+                    <label>Link da Galeria</label>
+                    <input type="text" id="novoLink" placeholder="Ex: https://..." value="#">
+                </div>
+            </div>
+            <button class="btn btn-success" onclick="adicionarEvento()">
+                ✨ Adicionar à Lista
+            </button>
+        </div>
+
+        <div class="section">
+            <div class="section-title" style="justify-content: space-between;">
+                <span>📂 Lista de Eventos</span>
+                <span style="font-size: 0.9rem; font-weight: normal; color: #666;" id="contadorEventos">0 eventos</span>
+            </div>
+            
+            <div class="form-grid">
+                <input type="text" id="searchBox" placeholder="🔍 Pesquisar evento..." onkeyup="renderizarLista()">
+            </div>
+
+            <div id="listaEventos" class="event-list">
+                </div>
+
+            <button class="btn btn-save-cloud" onclick="salvarNoGithub()">
+                🚀 SALVAR ALTERAÇÕES NO SITE
+            </button>
+            <p style="text-align: center; margin-top: 10px; color: #7f8c8d; font-size: 0.9rem;">
+                <i class="fas fa-info-circle"></i> As alterações só aparecem no site depois de clicar neste botão.
+            </p>
+        </div>
+    </div>
+
+    <footer>
+        <p>Studio NBV - Painel 3.0 © 2025</p>
+    </footer>
+</div>
+
+<div id="configModal" class="modal">
+    <div class="modal-content">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px;">
+            <h2>⚙️ Configuração GitHub</h2>
+            <span style="cursor:pointer; font-size:1.5rem;" onclick="fecharModal('configModal')">&times;</span>
+        </div>
+        <p style="margin-bottom:15px; color:#666; font-size:0.9rem;">Esses dados ficam salvos apenas no seu navegador.</p>
+        
+        <label>Usuário GitHub</label>
+        <input type="text" id="ghUser" placeholder="Ex: seu-usuario">
+        
+        <label style="margin-top:10px;">Nome do Repositório</label>
+        <input type="text" id="ghRepo" placeholder="Ex: meu-site-fotos">
+        
+        <label style="margin-top:10px;">Token de Acesso (PAT)</label>
+        <input type="password" id="ghToken" placeholder="ghp_xxxxxxxxxxxx">
+        
+        <button class="btn btn-success" style="width:100%; margin-top:20px;" onclick="salvarConfig()">Salvar e Conectar</button>
+    </div>
+</div>
+
+<div id="editModal" class="modal">
+    <div class="modal-content">
+        <h2>✏️ Editar Evento</h2>
+        <input type="hidden" id="editIndex">
+        <label style="margin-top:10px;">Título</label>
+        <input type="text" id="editTitulo">
+        <label style="margin-top:10px;">Data</label>
+        <input type="text" id="editData">
+        <label style="margin-top:10px;">Link</label>
+        <input type="text" id="editLink">
+        
+        <div style="display:flex; gap:10px; margin-top:20px;">
+            <button class="btn btn-success" style="flex:1" onclick="confirmarEdicao()">Salvar</button>
+            <button class="btn btn-danger" style="flex:1; background:#95a5a6;" onclick="fecharModal('editModal')">Cancelar</button>
+        </div>
+    </div>
+</div>
+
+<div class="notification" id="notification"></div>
+
+<script>
+    let eventos = [];
+    let shaAtual = ""; // Necessário para a API do GitHub
+    
+    // Carrega configurações ao iniciar
+    const config = JSON.parse(localStorage.getItem('nbv_gh_config') || '{}');
+
+    // Funções de Modal
+    function abrirConfig() {
+        document.getElementById('ghUser').value = config.user || '';
+        document.getElementById('ghRepo').value = config.repo || '';
+        document.getElementById('ghToken').value = config.token || '';
+        document.getElementById('configModal').classList.add('active');
+    }
+
+    function fecharModal(id) {
+        document.getElementById(id).classList.remove('active');
+    }
+
+    function salvarConfig() {
+        const newConfig = {
+            user: document.getElementById('ghUser').value.trim(),
+            repo: document.getElementById('ghRepo').value.trim(),
+            token: document.getElementById('ghToken').value.trim()
+        };
+        
+        if(!newConfig.user || !newConfig.repo || !newConfig.token) {
+            mostrarNotificacao('Preencha todos os campos!', true);
+            return;
+        }
+
+        localStorage.setItem('nbv_gh_config', JSON.stringify(newConfig));
+        location.reload(); // Recarrega para tentar conectar
+    }
+
+    function mostrarNotificacao(msg, erro = false) {
+        const notif = document.getElementById('notification');
+        notif.textContent = msg;
+        notif.className = erro ? 'notification show error' : 'notification show';
+        setTimeout(() => notif.classList.remove('show'), 3000);
+    }
+
+    function toggleLoading(show, text = "Carregando...") {
+        document.getElementById('loadingText').textContent = text;
+        document.getElementById('loadingOverlay').style.display = show ? 'flex' : 'none';
+    }
+
+    // --- LÓGICA DO GITHUB ---
+
+    // Função auxiliar para lidar com UTF-8 em Base64 (para acentos funcionarem)
+    function utf8_to_b64(str) {
+        return window.btoa(unescape(encodeURIComponent(str)));
+    }
+
+    function b64_to_utf8(str) {
+        return decodeURIComponent(escape(window.atob(str)));
+    }
+
+    async function carregarDadosDoGithub() {
+        if (!config.token) {
+            abrirConfig();
+            return;
+        }
+
+        toggleLoading(true, "Baixando lista de eventos do GitHub...");
+
+        try {
+            // Adiciona timestamp para evitar cache
+            const url = `https://api.github.com/repos/${config.user}/${config.repo}/contents/eventos.json?t=${new Date().getTime()}`;
+            
+            const response = await fetch(url, {
+                headers: { 'Authorization': `token ${config.token}` }
+            });
+
+            if (response.status === 404) {
+                // Arquivo não existe ainda, iniciamos vazio
+                eventos = [];
+                renderizarLista();
+                toggleLoading(false);
+                mostrarNotificacao('Arquivo eventos.json não encontrado. Crie um novo salvando.', true);
+                return;
+            }
+
+            if (!response.ok) throw new Error('Falha na conexão');
+
+            const data = await response.json();
+            shaAtual = data.sha; // Importante para poder salvar depois
+            
+            const content = b64_to_utf8(data.content);
+            eventos = JSON.parse(content);
+            
+            renderizarLista();
+            toggleLoading(false);
+            mostrarNotificacao('Eventos carregados com sucesso!');
+
+        } catch (error) {
+            console.error(error);
+            toggleLoading(false);
+            mostrarNotificacao('Erro ao conectar. Verifique suas configurações.', true);
+            abrirConfig();
+        }
+    }
+
+    async function salvarNoGithub() {
+        if (!config.token) {
+            abrirConfig();
+            return;
+        }
+
+        toggleLoading(true, "Enviando dados para o GitHub...");
+
+        try {
+            const url = `https://api.github.com/repos/${config.user}/${config.repo}/contents/eventos.json`;
+            
+            const body = {
+                message: "Atualização via Painel Admin NBV",
+                content: utf8_to_b64(JSON.stringify(eventos, null, 2)),
+                sha: shaAtual // Se for undefined (arquivo novo), a API aceita criar
+            };
+
+            const response = await fetch(url, {
+                method: 'PUT',
+                headers: { 
+                    'Authorization': `token ${config.token}`,
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(body)
+            });
+
+            if (response.ok) {
+                const data = await response.json();
+                shaAtual = data.content.sha; // Atualiza o SHA para a próxima salvada
+                toggleLoading(false);
+                mostrarNotificacao('✅ Sucesso! O site será atualizado em instantes.');
+            } else {
+                const errData = await response.json();
+                throw new Error(errData.message);
+            }
+
+        } catch (error) {
+            console.error(error);
+            toggleLoading(false);
+            mostrarNotificacao('Erro ao salvar: ' + error.message, true);
+        }
+    }
+
+    // --- LÓGICA DE GERENCIAMENTO ---
+
+    function adicionarEvento() {
+        const titulo = document.getElementById('novoTitulo').value.trim();
+        const data = document.getElementById('novoData').value.trim();
+        const link = document.getElementById('novoLink').value.trim();
+
+        if(!titulo || !data) {
+            mostrarNotificacao('Preencha pelo menos Título e Data.', true);
+            return;
+        }
+
+        // Adiciona no início da lista
+        eventos.unshift({ titulo, data, link });
+        
+        // Limpa campos
+        document.getElementById('novoTitulo').value = '';
+        document.getElementById('novoData').value = '';
+        document.getElementById('novoLink').value = '#';
+        
+        renderizarLista();
+        mostrarNotificacao('Evento adicionado à lista (Não esqueça de Salvar!)');
+    }
+
+    function removerEvento(index) {
+        if(confirm('Tem certeza que deseja remover este evento?')) {
+            eventos.splice(index, 1);
+            renderizarLista();
+        }
+    }
+
+    function abrirEdicao(index) {
+        const ev = eventos[index];
+        document.getElementById('editIndex').value = index;
+        document.getElementById('editTitulo').value = ev.titulo;
+        document.getElementById('editData').value = ev.data;
+        document.getElementById('editLink').value = ev.link;
+        document.getElementById('editModal').classList.add('active');
+    }
+
+    function confirmarEdicao() {
+        const index = document.getElementById('editIndex').value;
+        eventos[index].titulo = document.getElementById('editTitulo').value;
+        eventos[index].data = document.getElementById('editData').value;
+        eventos[index].link = document.getElementById('editLink').value;
+        
+        fecharModal('editModal');
+        renderizarLista();
+        mostrarNotificacao('Evento editado!');
+    }
+
+    function dataObjeto(dataStr) {
+        if(!dataStr) return new Date();
+        const parts = dataStr.split('/');
+        return new Date(parts[2], parts[1]-1, parts[0]);
+    }
+
+    function renderizarLista() {
+        const container = document.getElementById('listaEventos');
+        const termo = document.getElementById('searchBox').value.toLowerCase();
+        const hoje = new Date();
+        hoje.setHours(0,0,0,0);
+
+        container.innerHTML = '';
+        document.getElementById('contadorEventos').innerText = `${eventos.length} eventos`;
+
+        eventos.forEach((ev, index) => {
+            // Filtro de busca
+            if(termo && !ev.titulo.toLowerCase().includes(termo) && !ev.data.includes(termo)) return;
+
+            const div = document.createElement('div');
+            div.className = 'event-item';
+            
+            // Verifica se é futuro ou passado
+            const dataEv = dataObjeto(ev.data);
+            const isFuturo = dataEv >= hoje;
+            const tag = isFuturo 
+                ? '<span class="tag tag-future">Futuro</span>' 
+                : '<span class="tag tag-past">Realizado</span>';
+
+            div.innerHTML = `
+                <div class="event-info">
+                    <div class="event-title">${ev.titulo} ${tag}</div>
+                    <div class="event-meta">
+                        <i class="far fa-calendar"></i> ${ev.data} &nbsp;|&nbsp; 
+                        <i class="fas fa-link"></i> ${ev.link}
+                    </div>
+                </div>
+                <div class="event-actions">
+                    <button class="btn btn-edit" onclick="abrirEdicao(${index})"><i class="fas fa-pencil-alt"></i></button>
+                    <button class="btn btn-danger" onclick="removerEvento(${index})"><i class="fas fa-trash"></i></button>
+                </div>
+            `;
+            container.appendChild(div);
+        });
+    }
+
+    // Iniciar
+    document.addEventListener('DOMContentLoaded', carregarDadosDoGithub);
+
+</script>
+</body>
+</html>
